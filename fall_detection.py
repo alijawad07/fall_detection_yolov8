@@ -81,12 +81,13 @@ while True:
         # Display the detection rectangle with class label
         color = (0, 255, 0)  # Green
         cv2.rectangle(frame, (int(xmin), int(ymin)), (int(xmax), int(ymax)), color, 2)
-        cv2.putText(frame, classes[int(class_idx)], (int(xmin), int(ymin) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+        cv2.putText(frame, f'{classes[int(class_idx)]}:{confidence:.2f}', (int(xmin), int(ymin) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
     # Display the FPS
     end_time = time.time()
     fps = int(frame_count / (end_time - start_time))
-    cv2.putText(frame, "FPS: {}".format(fps), (10, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255))
+    cv2.putText(frame, "FPS: {}".format(fps), (10, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255),2)
+    cv2.putText(frame, "Model: Yolov8x", (10, frame_height - 20), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 138, 139),3)
 
     # Write the frame to the output video
     out_video.write(frame)
